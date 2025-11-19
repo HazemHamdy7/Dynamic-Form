@@ -10,9 +10,7 @@ class DynamicFormScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Dynamic Form"),
-      ),
+      appBar: AppBar(title: const Text("Dynamic Form")),
 
       body: BlocBuilder<FormCubit, DynamicFormState>(
         builder: (context, state) {
@@ -39,8 +37,9 @@ class DynamicFormScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(bottom: 16),
                     child: DropdownButtonFormField(
                       items: f.options
-                          .map((o) =>
-                              DropdownMenuItem(value: o, child: Text(o)))
+                          .map(
+                            (o) => DropdownMenuItem(value: o, child: Text(o)),
+                          )
                           .toList(),
                       onChanged: (v) {},
                       decoration: InputDecoration(
@@ -57,24 +56,32 @@ class DynamicFormScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(f.label,
-                            style: const TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold)),
+                        Text(
+                          f.label,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         ...f.options.map(
                           (o) => Row(
                             children: [
-                              Radio(value: o, groupValue: null, onChanged: (v) {}),
+                              Radio(
+                                value: o,
+                                groupValue: null,
+                                onChanged: (v) {},
+                              ),
                               Text(o),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
                   );
                 }
 
                 return const SizedBox.shrink();
-              }).toList(),
+              }),
             ],
           );
         },
