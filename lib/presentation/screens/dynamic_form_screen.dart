@@ -1,6 +1,6 @@
-import 'package:dynamic_form/presentation/widget/dynamic_fields/dropdown_field_item.dart';
-import 'package:dynamic_form/presentation/widget/dynamic_fields/radio_field_item.dart';
-import 'package:dynamic_form/presentation/widget/dynamic_fields/text_field_item.dart';
+import 'package:dynamic_form/presentation/widgets/field_widgets/dropdown_field_item.dart';
+import 'package:dynamic_form/presentation/widgets/field_widgets/radio_field_item.dart';
+import 'package:dynamic_form/presentation/widgets/field_widgets/text_field_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dynamic_form/presentation/cubit/form_cubit.dart';

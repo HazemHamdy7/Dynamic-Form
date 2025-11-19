@@ -19,7 +19,7 @@ class TextFieldModel extends FieldModel {
 
   @override
   Map<String, dynamic> toMap() {
-    return {'id': id, 'label': label, 'type': 'text'};
+    return {'id': id, 'label': label, 'type': FieldType.text};
   }
 }
 
@@ -31,7 +31,12 @@ class DropdownFieldModel extends FieldModel {
 
   @override
   Map<String, dynamic> toMap() {
-    return {'id': id, 'label': label, 'type': 'dropdown', 'options': options};
+    return {
+      'id': id,
+      'label': label,
+      'type': FieldType.dropdown,
+      'options': options,
+    };
   }
 }
 
@@ -43,7 +48,11 @@ class RadioFieldModel extends FieldModel {
 
   @override
   Map<String, dynamic> toMap() {
-    return {'id': id, 'label': label, 'type': 'radio', 'options': options};
+    return {
+      'id': id,
+      'label': label,
+      'type': FieldType.radio,
+      'options': options,
+    };
   }
 }
-

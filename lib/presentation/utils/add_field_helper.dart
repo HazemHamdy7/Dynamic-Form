@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_form/data/model/field_model.dart';
-import 'package:dynamic_form/data/model/factory_model.dart';
+import 'package:dynamic_form/data/factory/factory_model.dart';
 
 class AddFieldHelper {
   // Show Error (SnackBar)

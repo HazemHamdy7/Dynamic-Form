@@ -1,9 +1,9 @@
-import 'package:dynamic_form/helper/add_field_helper.dart';
+import 'package:dynamic_form/presentation/utils/add_field_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_form/data/model/field_model.dart';
-import 'package:dynamic_form/presentation/widget/dialog/field_name_input.dart';
-import 'package:dynamic_form/presentation/widget/dialog/field_type_selector.dart';
-import 'package:dynamic_form/presentation/widget/dialog/options_list_builder.dart';
+import 'package:dynamic_form/presentation/widgets/dialog/field_name_input.dart';
+import 'package:dynamic_form/presentation/widgets/dialog/field_type_selector.dart';
+import 'package:dynamic_form/presentation/widgets/dialog/options_list_builder.dart';
 
 class AddFieldDialog extends StatefulWidget {
   final FieldModel? editField;
