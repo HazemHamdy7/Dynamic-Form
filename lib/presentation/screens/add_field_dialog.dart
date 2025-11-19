@@ -47,7 +47,7 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
 
       content: SingleChildScrollView(
         child: Column(
-          children: [
+           children: [
             FieldNameInput(controller: labelController),
             const SizedBox(height: 12),
 
