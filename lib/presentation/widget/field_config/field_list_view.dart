@@ -1,3 +1,5 @@
+import 'package:dynamic_form/data/model/field_model.dart';
+import 'package:dynamic_form/presentation/screens/add_field_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -6,6 +8,8 @@ import 'package:dynamic_form/presentation/cubit/form_state.dart';
 import 'field_item_tile.dart';
 
 class FieldListView extends StatelessWidget {
+  const FieldListView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<FormCubit, DynamicFormState>(
@@ -25,7 +29,18 @@ class FieldListView extends StatelessWidget {
           itemCount: state.fields.length,
           separatorBuilder: (_, __) => const Divider(),
           itemBuilder: (context, index) {
-            return FieldItemTile(field: state.fields[index]);
+            return FieldItemTile(
+              field: state.fields[index],
+              onEdit: (FieldModel field) {
+                return showDialog<FieldModel?>(
+                  context: context,
+                  builder: (_) => AddFieldDialog(editField: field),
+                );
+              },
+              onDelete: (String fieldId) {
+                context.read<FormCubit>().removeField(fieldId);
+              },
+            );
           },
         );
       },

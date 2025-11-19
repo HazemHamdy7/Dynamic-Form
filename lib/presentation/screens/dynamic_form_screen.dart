@@ -1,3 +1,6 @@
+import 'package:dynamic_form/presentation/widget/dynamic_fields/dropdown_field_item.dart';
+import 'package:dynamic_form/presentation/widget/dynamic_fields/radio_field_item.dart';
+import 'package:dynamic_form/presentation/widget/dynamic_fields/text_field_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dynamic_form/presentation/cubit/form_cubit.dart';
@@ -9,80 +12,55 @@ class DynamicFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _formKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(title: const Text("Dynamic Form")),
-
       body: BlocBuilder<FormCubit, DynamicFormState>(
         builder: (context, state) {
+          final cubit = context.read<FormCubit>();
           final fields = state.fields;
 
-          return ListView(
-            padding: const EdgeInsets.all(16),
-            children: [
-              ...fields.map((f) {
-                if (f is TextFieldModel) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: f.label,
-                        border: const OutlineInputBorder(),
-                      ),
-                    ),
+          return Form(
+            key: _formKey,
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: fields.length + 1,
+              itemBuilder: (context, index) {
+                if (index == fields.length) {
+                  return ElevatedButton(
+                    child: const Text("Submit"),
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+
+                        final answers = cubit.state.answers;
+
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            title: const Text("Submitted"),
+                            content: Text(answers.toString()),
+                          ),
+                        );
+                      }
+                    },
                   );
                 }
 
-                if (f is DropdownFieldModel) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: DropdownButtonFormField(
-                      items: f.options
-                          .map(
-                            (o) => DropdownMenuItem(value: o, child: Text(o)),
-                          )
-                          .toList(),
-                      onChanged: (v) {},
-                      decoration: InputDecoration(
-                        labelText: f.label,
-                        border: const OutlineInputBorder(),
-                      ),
-                    ),
-                  );
-                }
+                final field = fields[index];
 
-                if (f is RadioFieldModel) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          f.label,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        ...f.options.map(
-                          (o) => Row(
-                            children: [
-                              Radio(
-                                value: o,
-                                groupValue: null,
-                                onChanged: (v) {},
-                              ),
-                              Text(o),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
+                if (field is TextFieldModel) {
+                  return TextFieldItem(field: field);
+                } else if (field is DropdownFieldModel) {
+                  return DropdownFieldItem(field: field);
+                } else if (field is RadioFieldModel) {
+                  return RadioFieldItem(field: field);
                 }
 
                 return const SizedBox.shrink();
-              }),
-            ],
+              },
+            ),
           );
         },
       ),

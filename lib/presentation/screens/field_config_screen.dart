@@ -1,4 +1,4 @@
-import 'package:dynamic_form/presentation/widget/field_list_view.dart';
+import 'package:dynamic_form/presentation/widget/field_config/field_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

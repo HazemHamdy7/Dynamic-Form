@@ -3,7 +3,7 @@ import 'package:dynamic_form/data/model/field_model.dart';
 import 'package:dynamic_form/presentation/cubit/form_state.dart';
 
 class FormCubit extends Cubit<DynamicFormState> {
-  FormCubit() : super(DynamicFormState(fields: []));
+  FormCubit() : super(DynamicFormState(fields: [], answers: {}));
 
   void addField(FieldModel field) {
     final fields = List<FieldModel>.from(state.fields)..add(field);
@@ -37,5 +37,23 @@ class FormCubit extends Cubit<DynamicFormState> {
 
   void clearForm() {
     emit(state.copyWith(fields: []));
+  }
+
+  void saveText(String fieldId, String value) {
+    final newAnswers = Map<String, dynamic>.from(state.answers);
+    newAnswers[fieldId] = value;
+    emit(state.copyWith(answers: newAnswers));
+  }
+
+  void saveDropdown(String fieldId, String? value) {
+    final newAnswers = Map<String, dynamic>.from(state.answers);
+    newAnswers[fieldId] = value;
+    emit(state.copyWith(answers: newAnswers));
+  }
+
+  void saveRadio(String fieldId, String? value) {
+    final newAnswers = Map<String, dynamic>.from(state.answers);
+    newAnswers[fieldId] = value;
+    emit(state.copyWith(answers: newAnswers));
   }
 }

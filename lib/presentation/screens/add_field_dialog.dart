@@ -1,6 +1,9 @@
+import 'package:dynamic_form/helper/add_field_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:dynamic_form/data/model/field_model.dart';
-import 'package:dynamic_form/data/model/factory_model.dart';
+import 'package:dynamic_form/presentation/widget/dialog/field_name_input.dart';
+import 'package:dynamic_form/presentation/widget/dialog/field_type_selector.dart';
+import 'package:dynamic_form/presentation/widget/dialog/options_list_builder.dart';
 
 class AddFieldDialog extends StatefulWidget {
   final FieldModel? editField;
@@ -24,20 +27,16 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
       text: widget.editField?.label ?? "",
     );
 
-    if (widget.editField != null) {
-      selectedType = widget.editField!.type;
+    selectedType = widget.editField?.type ?? FieldType.text;
 
-      if (widget.editField is DropdownFieldModel) {
-        optionControllers = (widget.editField as DropdownFieldModel)
-            .options
-            .map((o) => TextEditingController(text: o))
-            .toList();
-      } else if (widget.editField is RadioFieldModel) {
-        optionControllers = (widget.editField as RadioFieldModel)
-            .options
-            .map((o) => TextEditingController(text: o))
-            .toList();
-      }
+    if (widget.editField is DropdownFieldModel) {
+      optionControllers = (widget.editField as DropdownFieldModel).options
+          .map((o) => TextEditingController(text: o))
+          .toList();
+    } else if (widget.editField is RadioFieldModel) {
+      optionControllers = (widget.editField as RadioFieldModel).options
+          .map((o) => TextEditingController(text: o))
+          .toList();
     }
   }
 
@@ -48,67 +47,29 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
 
       content: SingleChildScrollView(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            // field name
-            TextField(
-              controller: labelController,
-              decoration: const InputDecoration(
-                labelText: "Field Name",
-              ),
-            ),
+            FieldNameInput(controller: labelController),
             const SizedBox(height: 12),
 
-            // field type
-            DropdownButtonFormField<FieldType>(
+            FieldTypeSelector(
               value: selectedType,
-              items: FieldType.values.map((t) {
-                return DropdownMenuItem(
-                  value: t,
-                  child: Text(t.toString().split(".").last),
-                );
-              }).toList(),
-              onChanged: (v) {
-                setState(() => selectedType = v!);
-              },
-              decoration: const InputDecoration(labelText: "Field Type"),
+              onChanged: (v) => setState(() => selectedType = v!),
             ),
-
             const SizedBox(height: 12),
 
-            // options section
             if (selectedType != FieldType.text)
-              Column(
-                children: [
-                  ...optionControllers.map(
-                    (controller) => Padding(
-                      padding: const EdgeInsets.only(bottom: 8),
-                      child: TextField(
-                        controller: controller,
-                        decoration: InputDecoration(
-                          labelText: "Option",
-                          suffixIcon: IconButton(
-                            icon: const Icon(Icons.close),
-                            onPressed: () {
-                              setState(() {
-                                optionControllers.remove(controller);
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-
-                  TextButton(
-                    onPressed: () {
-                      setState(() {
-                        optionControllers.add(TextEditingController());
-                      });
-                    },
-                    child: const Text("Add Option"),
-                  )
-                ],
+              OptionsListBuilder(
+                options: optionControllers,
+                onAddOption: () {
+                  AddFieldHelper.addOption(
+                    context: context,
+                    optionControllers: optionControllers,
+                    onUpdate: () => setState(() {}),
+                  );
+                },
+                onRemove: (i) => setState(() {
+                  optionControllers.removeAt(i);
+                }),
               ),
           ],
         ),
@@ -119,21 +80,18 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
           child: const Text("Cancel"),
           onPressed: () => Navigator.pop(context),
         ),
+
         ElevatedButton(
           child: const Text("Save"),
           onPressed: () {
-            final name = labelController.text.trim();
-            if (name.isEmpty) return;
+            final model = AddFieldHelper.saveField(
+              context: context,
+              label: labelController.text,
+              type: selectedType,
+              optionControllers: optionControllers,
+            );
 
-            final options = optionControllers
-                .map((c) => c.text.trim())
-                .where((o) => o.isNotEmpty)
-                .toList();
-
-            FieldModel field =
-                FieldFactory.create(selectedType, label: name, options: options);
-
-            Navigator.pop(context, field);
+            if (model != null) Navigator.pop(context, model);
           },
         ),
       ],
