@@ -1,16 +1,34 @@
-# dynamic_form
+# ## Dynamic Form (Flutter)
 
-A new Flutter project.
+Flutter app with two screens:
 
-## Getting Started
+### **1. Field Configuration**
 
-This project is a starting point for a Flutter application.
+* Add field name
+* Choose type: Text Field / Dropdown Menu
+* Add dropdown options
+* Edit & delete fields
 
-A few resources to get you started if this is your first Flutter project:
+### **2. Dynamic Form**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+* Displays fields created in screen 1
+* Text fields → TextFormField
+* Dropdowns → DropdownButtonFormField
+* Built-in validation & submit
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### **Tech**
+
+* Flutter
+* flutter_bloc
+* Clean & simple UI
+
+### **Run**
+
+```
+flutter pub get
+flutter run
+```
+
+Repo:
+[https://github.com/HazemHamdy7/Dynamic-Form](https://github.com/HazemHamdy7/Dynamic-Form)
+
