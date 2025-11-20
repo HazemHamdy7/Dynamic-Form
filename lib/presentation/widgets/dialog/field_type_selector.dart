@@ -1,6 +1,5 @@
 import 'package:dynamic_form/data/model/field_type.dart';
-import 'package:dynamic_form/data/model/text_field_model.dart';
-import 'package:flutter/material.dart';
+ import 'package:flutter/material.dart';
 
 class FieldTypeSelector extends StatelessWidget {
   final FieldType value;
