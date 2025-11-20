@@ -1,13 +1,10 @@
- import 'package:dynamic_form/presentation/cubit/form_cubit.dart';
+import 'package:dynamic_form/data/model/field_type.dart';
+import 'package:dynamic_form/presentation/cubit/form_cubit.dart';
 import 'package:dynamic_form/presentation/screens/add_field_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:dynamic_form/data/model/field_type.dart';
 
 class FloatingActionButtonWidget extends StatelessWidget {
-  const FloatingActionButtonWidget({
-    super.key,
-    required this.cubit,
-  });
+  const FloatingActionButtonWidget({super.key, required this.cubit});
 
   final FormCubit cubit;
 
@@ -23,9 +20,16 @@ class FloatingActionButtonWidget extends StatelessWidget {
           context: context,
           builder: (_) => const AddFieldDialog(),
         );
-    
+
         if (created != null) {
           cubit.addField(created);
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text("Field saved successfully"),
+              backgroundColor: Colors.green,
+            ),
+          );
         }
       },
     );

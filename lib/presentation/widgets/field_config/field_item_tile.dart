@@ -1,7 +1,7 @@
 import 'package:dynamic_form/data/model/field_type.dart';
 import 'package:flutter/material.dart';
- 
-typedef EditCallback = Future<FieldModel?> Function(FieldModel field);
+
+typedef EditCallback = void Function(FieldModel field);
 typedef DeleteCallback = void Function(String fieldId);
 
 class FieldItemTile extends StatelessWidget {
@@ -19,13 +19,13 @@ class FieldItemTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final label = {
-      FieldType.text: "Text",
+      FieldType.text: "Text Field",
       FieldType.dropdown: "Dropdown Field",
       FieldType.radio: "Radio Field",
     };
 
     return ListTile(
-      title: Text(field.label),
+      title: Text(field.label ?? ''),
       subtitle: Text(label[field.type]!),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

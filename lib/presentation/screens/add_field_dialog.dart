@@ -1,8 +1,7 @@
+import 'package:dynamic_form/data/factory/factory_model.dart';
 import 'package:dynamic_form/data/model/dropdown_field_model.dart';
 import 'package:dynamic_form/data/model/field_type.dart';
 import 'package:dynamic_form/data/model/radio_field_model.dart';
-import 'package:dynamic_form/data/model/text_field_model.dart';
-import 'package:dynamic_form/presentation/utils/add_field_helper.dart';
 import 'package:dynamic_form/presentation/widgets/dialog/field_type_selector.dart';
 import 'package:dynamic_form/presentation/widgets/dialog/options_list_builder.dart';
 import 'package:flutter/material.dart';
@@ -108,24 +107,35 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
         ),
       ),
       actions: [
-        TextButton(
-          style: TextButton.styleFrom(backgroundColor: Colors.red),
+        ElevatedButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(Colors.red),
+          ),
           child: const Text("Cancel", style: TextStyle(color: Colors.white)),
           onPressed: () => Navigator.pop(context),
         ),
-        TextButton(
-          style: TextButton.styleFrom(backgroundColor: Colors.green),
-          child: const Text("Save", style: TextStyle(color: Colors.white)),
-          onPressed: () {
-            final field = AddFieldHelper.saveField(
-              context: context,
-              label: labelController.text,
-              type: selectedType,
-              optionControllers: optionControllers,
-            );
-            if (field != null) {
-              Navigator.pop(context, field);
+        ElevatedButton(
+          child: const Text("Save"),
+          onPressed: () async {
+            final name = labelController.text.trim();
+            if (name.isEmpty) {
+              Navigator.pop(context);
+              return;
             }
+
+            final validOptions = optionControllers
+                .map((c) => c.text.trim())
+                .where((o) => o.isNotEmpty)
+                .toList();
+
+            final field = FieldFactory.create(
+              selectedType,
+              label: name,
+              options: validOptions,
+              id: widget.editField?.id,
+            );
+
+            Navigator.pop(context, field);
           },
         ),
       ],

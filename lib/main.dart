@@ -11,16 +11,18 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('fields');
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final repo = FormRepository();
+
+  MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FormCubit(FormRepository()),
+      create: (context) => FormCubit(repo),
       child: MaterialApp(
         title: 'Dynamic Form Builder',
         theme: ThemeData(primarySwatch: Colors.deepPurple, useMaterial3: true),
