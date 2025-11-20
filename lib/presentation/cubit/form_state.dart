@@ -1,4 +1,4 @@
-import 'package:dynamic_form/data/model/field_model.dart';
+import 'package:dynamic_form/data/model/field_type.dart';
 
 class DynamicFormState {
   final List<FieldModel> fields;

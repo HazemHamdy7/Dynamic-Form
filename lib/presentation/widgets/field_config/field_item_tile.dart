@@ -1,6 +1,6 @@
+import 'package:dynamic_form/data/model/field_type.dart';
 import 'package:flutter/material.dart';
-import 'package:dynamic_form/data/model/field_model.dart';
-
+ 
 typedef EditCallback = Future<FieldModel?> Function(FieldModel field);
 typedef DeleteCallback = void Function(String fieldId);
 
