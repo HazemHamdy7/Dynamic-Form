@@ -1,12 +1,9 @@
 import 'package:dynamic_form/presentation/widgets/field_config/field_list_view.dart';
+import 'package:dynamic_form/presentation/widgets/field_config/floating_action_button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:dynamic_form/presentation/cubit/form_cubit.dart';
 import 'package:dynamic_form/presentation/cubit/form_state.dart';
-
-import 'package:dynamic_form/data/model/field_model.dart';
-import 'package:dynamic_form/presentation/screens/add_field_dialog.dart';
 import 'dynamic_form_screen.dart';
 
 class FieldConfigScreen extends StatelessWidget {
@@ -42,19 +39,7 @@ class FieldConfigScreen extends StatelessWidget {
 
       body: FieldListView(),
 
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () async {
-          final created = await showDialog<FieldModel?>(
-            context: context,
-            builder: (_) => const AddFieldDialog(),
-          );
-
-          if (created != null) {
-            cubit.addField(created);
-          }
-        },
-      ),
+      floatingActionButton: FloatingActionButtonWidget(cubit: cubit),
     );
   }
 }

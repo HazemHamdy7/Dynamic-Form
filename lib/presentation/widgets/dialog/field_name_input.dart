@@ -8,6 +8,9 @@ class FieldNameInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      autofocus: true,
+      textInputAction: TextInputAction.next,
+
       controller: controller,
       decoration: const InputDecoration(labelText: "Field Name"),
     );

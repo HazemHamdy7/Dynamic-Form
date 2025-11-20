@@ -11,7 +11,9 @@ class RadioFieldItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<FormCubit>();
-    final options = field.options.where((o) => o.trim().isNotEmpty).toList();
+    final options = field.options
+        .where((option) => option.trim().isNotEmpty)
+        .toList();
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
@@ -41,18 +43,23 @@ class RadioFieldItem extends StatelessWidget {
                 ),
               ),
 
-              ...options.map(
-                (option) => RadioListTile<String>(
-                  title: Text(option),
-                  value: option,
-                  groupValue: selected,
-                  onChanged: (value) {
-                    cubit.saveRadio(field.id, value);
-                    formFieldState.didChange(value);
-                  },
-                ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: options.length,
+                itemBuilder: (context, index) {
+                  final option = options[index];
+                  return RadioListTile<String>(
+                    title: Text(option),
+                    value: option,
+                    groupValue: selected,
+                    onChanged: (value) {
+                      cubit.saveRadio(field.id, value);
+                      formFieldState.didChange(value);
+                    },
+                  );
+                },
               ),
-
               if (formFieldState.hasError)
                 Text(
                   formFieldState.errorText!,

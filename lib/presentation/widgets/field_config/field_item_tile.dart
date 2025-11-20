@@ -18,9 +18,15 @@ class FieldItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final label = {
+      FieldType.text: "Text",
+      FieldType.dropdown: "Dropdown Field",
+      FieldType.radio: "Radio Field",
+    };
+
     return ListTile(
       title: Text(field.label),
-      subtitle: Text(field.type.toString().split('.').last),
+      subtitle: Text(label[field.type]!),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

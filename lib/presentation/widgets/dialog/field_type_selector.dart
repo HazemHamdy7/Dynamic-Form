@@ -13,15 +13,23 @@ class FieldTypeSelector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final labels = {
+      FieldType.text: "Text ",
+      FieldType.dropdown: "Dropdown Menu",
+      FieldType.radio: "Radio Buttons",
+    };
     return DropdownButtonFormField<FieldType>(
-      value: value,
-      decoration: const InputDecoration(labelText: "Field Type"),
+      borderRadius: BorderRadius.circular(8),
+      dropdownColor: Colors.grey[200],
+      decoration: InputDecoration(
+        labelText: "Field Type",
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+      ),
+      key: ValueKey(value),
+      initialValue: value,
       items: FieldType.values
           .map(
-            (type) => DropdownMenuItem(
-              value: type,
-              child: Text(type.toString().split('.').last),
-            ),
+            (type) => DropdownMenuItem(value: type, child: Text(labels[type]!)),
           )
           .toList(),
       onChanged: onChanged,

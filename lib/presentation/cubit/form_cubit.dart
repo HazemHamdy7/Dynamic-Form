@@ -8,18 +8,11 @@ class FormCubit extends Cubit<DynamicFormState> {
   void addField(FieldModel field) {
     final fields = List<FieldModel>.from(state.fields)..add(field);
     emit(state.copyWith(fields: fields));
-    // emit(state.copyWith(fields: [...state.fields, field]));
   }
 
   void removeField(String id) {
     final fields = state.fields.where((element) => element.id != id).toList();
     emit(state.copyWith(fields: fields));
-
-    // emit(
-    //   state.copyWith(
-    //     fields: state.fields.where((element) => element != field).toList()
-    //   ),
-    // );
   }
 
   void updateField(FieldModel updatedField) {
@@ -28,11 +21,6 @@ class FormCubit extends Cubit<DynamicFormState> {
         .toList();
 
     emit(state.copyWith(fields: fields));
-    // emit(
-    //   state.copyWith(
-    //     fields: state.fields.map((e) => e == updatedField ? updatedField : e).toList(),
-    //   ),
-    // );
   }
 
   void clearForm() {

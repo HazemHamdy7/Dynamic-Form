@@ -16,24 +16,32 @@ class OptionsListBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ...List.generate(
-          options.length,
-          (index) => Padding(
-            padding: const EdgeInsets.only(bottom: 8),
-            child: TextField(
-              controller: options[index],
-              decoration: InputDecoration(
-                labelText: "Option",
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () => onRemove(index),
+        Expanded(
+          child: ListView.builder(
+            itemCount: options.length,
+            itemBuilder: (context, index) {
+              return TextField(
+                controller: options[index],
+                decoration: InputDecoration(
+                  labelText: "Option ${index + 1}",
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () => onRemove(index),
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           ),
         ),
 
-        TextButton(onPressed: onAddOption, child: const Text("Add Option")),
+        TextButton(
+          style: ButtonStyle(
+            backgroundColor: WidgetStateProperty.all(Colors.black45),
+            foregroundColor: WidgetStateProperty.all(Colors.white),
+          ),
+          onPressed: onAddOption,
+          child: const Text("Add Option"),
+        ),
       ],
     );
   }
