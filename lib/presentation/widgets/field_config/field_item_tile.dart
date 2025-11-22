@@ -25,7 +25,9 @@ class FieldItemTile extends StatelessWidget {
     };
 
     return ListTile(
-      title: Text(field.label ?? ''),
+      title: Text(field.label),
+      leading: const Icon(Icons.drag_handle),
+
       subtitle: Text(label[field.type]!),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,

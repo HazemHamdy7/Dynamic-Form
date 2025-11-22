@@ -26,44 +26,32 @@ class FieldListView extends StatelessWidget {
           );
         }
 
-        return ListView.separated(
+        return ReorderableListView.builder(
           padding: const EdgeInsets.all(12),
           itemCount: state.fields.length,
-          separatorBuilder: (_, __) => const Divider(),
+          onReorder: cubit.reorderFields,
           itemBuilder: (context, index) {
             final field = state.fields[index];
 
-            return FieldItemTile(
-              field: field,
+            return Container(
+              key: ValueKey(field.id),
+              child: FieldItemTile(
+                field: field,
 
-              onEdit: (field) async {
-                final updatedField = await showDialog<FieldModel?>(
-                  context: context,
-                  builder: (_) => AddFieldDialog(editField: field),
-                );
-
-                if (updatedField != null) {
-                  cubit.updateField(updatedField);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Field updated successfully"),
-                      backgroundColor: Colors.green,
-                    ),
+                onEdit: (oldField) async {
+                  final updatedField = await showDialog<FieldModel?>(
+                    context: context,
+                    builder: (_) => AddFieldDialog(editField: oldField),
                   );
-                }
-              },
+                  if (updatedField != null) {
+                    cubit.updateField(updatedField);
+                  }
+                },
 
-              onDelete: (id) {
-                context.read<FormCubit>().removeField(id);
-
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("Field deleted"),
-                    backgroundColor: Colors.red,
-                  ),
-                );
-              },
+                onDelete: (id) {
+                  cubit.removeField(id);
+                },
+              ),
             );
           },
         );

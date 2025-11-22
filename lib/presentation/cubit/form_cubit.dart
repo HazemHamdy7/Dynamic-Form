@@ -64,4 +64,21 @@ class FormCubit extends Cubit<DynamicFormState> {
     final answers = {...state.answers, fieldId: value};
     emit(state.copyWith(answers: answers));
   }
+
+  //  Reorder fields
+
+  void reorderFields(int oldIndex, int newIndex) {
+    final updated = List<FieldModel>.from(state.fields);
+
+    if (newIndex > oldIndex) {
+      newIndex -= 1;
+    }
+
+    final item = updated.removeAt(oldIndex);
+    updated.insert(newIndex, item);
+
+    emit(state.copyWith(fields: updated));
+
+    persist();
+  }
 }
