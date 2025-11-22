@@ -50,19 +50,9 @@ class FormCubit extends Cubit<DynamicFormState> {
     persist();
   }
 
-  void saveText(String fieldId, String value) {
-    final answers = {...state.answers, fieldId: value};
-    emit(state.copyWith(answers: answers));
-  }
-
-  void saveDropdown(String fieldId, String? value) {
-    final answers = {...state.answers, fieldId: value};
-    emit(state.copyWith(answers: answers));
-  }
-
-  void saveRadio(String fieldId, String? value) {
-    final answers = {...state.answers, fieldId: value};
-    emit(state.copyWith(answers: answers));
+  void saveAnswer(String fieldId, dynamic value) {
+    final updatedAnswers = {...state.answers, fieldId: value};
+    emit(state.copyWith(answers: updatedAnswers));
   }
 
   //  Reorder fields
@@ -73,7 +63,6 @@ class FormCubit extends Cubit<DynamicFormState> {
     if (newIndex > oldIndex) {
       newIndex -= 1;
     }
-
     final item = updated.removeAt(oldIndex);
     updated.insert(newIndex, item);
 

@@ -33,10 +33,10 @@ class DropdownFieldItem extends StatelessWidget {
         },
 
         onSaved: (value) {
-          cubit.saveDropdown(field.id, value);
+          cubit.saveAnswer(field.id, value);
         },
         onChanged: (value) {
-          cubit.saveDropdown(field.id, value);
+          cubit.saveAnswer(field.id, value);
         },
       ),
     );

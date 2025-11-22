@@ -26,7 +26,7 @@ class RadioFieldItem extends StatelessWidget {
         },
 
         onSaved: (value) {
-          cubit.saveRadio(field.id, value);
+          cubit.saveAnswer(field.id, value);
         },
 
         builder: (formFieldState) {
@@ -54,7 +54,7 @@ class RadioFieldItem extends StatelessWidget {
                     value: option,
                     groupValue: selected,
                     onChanged: (value) {
-                      cubit.saveRadio(field.id, value);
+                      cubit.saveAnswer(field.id, value);
                       formFieldState.didChange(value);
                     },
                   );

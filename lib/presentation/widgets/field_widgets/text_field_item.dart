@@ -27,7 +27,7 @@ class TextFieldItem extends StatelessWidget {
         },
 
         onSaved: (value) {
-          cubit.saveText(field.id, value ?? "");
+          cubit.saveAnswer(field.id, value ?? "");
         },
       ),
     );
