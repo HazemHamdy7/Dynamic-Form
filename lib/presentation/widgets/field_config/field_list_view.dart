@@ -27,32 +27,25 @@ class FieldListView extends StatelessWidget {
         }
 
         return ReorderableListView.builder(
-          physics: const BouncingScrollPhysics(),
-          padding: const EdgeInsets.only(bottom: 100),
-
+          padding: const EdgeInsets.all(12),
           itemCount: state.fields.length,
           onReorder: cubit.reorderFields,
           itemBuilder: (context, index) {
             final field = state.fields[index];
 
-            return Container(
+            return Material(
               key: ValueKey(field.id),
               child: FieldItemTile(
                 field: field,
-
+                index: index,
                 onEdit: (oldField) async {
                   final updatedField = await showDialog<FieldModel?>(
                     context: context,
                     builder: (_) => AddFieldDialog(editField: oldField),
                   );
-                  if (updatedField != null) {
-                    cubit.updateField(updatedField);
-                  }
+                  if (updatedField != null) cubit.updateField(updatedField);
                 },
-
-                onDelete: (id) {
-                  cubit.removeField(id);
-                },
+                onDelete: cubit.removeField,
               ),
             );
           },
