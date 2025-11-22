@@ -36,7 +36,7 @@ class RadioFieldItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                field.label ?? '',
+                field.label,
                 style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,

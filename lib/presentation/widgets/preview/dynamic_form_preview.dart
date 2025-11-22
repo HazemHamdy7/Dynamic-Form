@@ -53,9 +53,8 @@ class DynamicFormPreview extends StatelessWidget {
                   );
                 }
 
-                return ListView.separated(
+                return ListView.builder(
                   itemCount: state.fields.length,
-                  separatorBuilder: (_, __) => const SizedBox(height: 12),
                   itemBuilder: (context, index) {
                     final field = state.fields[index];
                     return _buildPreviewTile(field);
