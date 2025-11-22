@@ -40,6 +40,7 @@ dependencies:
   signalr_core: ^1.1.2
   hive: ^2.2.3
   hive_flutter: ^1.1.0
+  get_it: ^9.1.0
 
 dev_dependencies:
   flutter_test:

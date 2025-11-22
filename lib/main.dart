@@ -1,3 +1,4 @@
+import 'package:dynamic_form/core/di/service_locator.dart';
 import 'package:dynamic_form/data/repository/form_repository.dart';
 import 'package:dynamic_form/presentation/cubit/form_cubit.dart';
 import 'package:dynamic_form/presentation/screens/field_config_screen.dart';
@@ -10,6 +11,7 @@ void main() async {
 
   await Hive.initFlutter();
   await Hive.openBox('fields');
+  initServiceLocator();
 
   runApp(MyApp());
 }
@@ -22,7 +24,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => FormCubit(repo),
+      create: (_) => getIt<FormCubit>(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
