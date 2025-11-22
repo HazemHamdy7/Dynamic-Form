@@ -1,3 +1,4 @@
+import 'package:dynamic_form/presentation/widgets/preview/dynamic_form_preview.dart';
 import 'package:dynamic_form/presentation/widgets/field_config/field_list_view.dart';
 import 'package:dynamic_form/presentation/widgets/field_config/floating_action_button_widget.dart';
 import 'package:flutter/material.dart';
@@ -37,8 +38,12 @@ class FieldConfigScreen extends StatelessWidget {
         ],
       ),
 
-      body: FieldListView(),
-
+      body: Column(
+        children: [
+          Expanded(child: FieldListView()),
+          const DynamicFormPreview(),
+        ],
+      ),
       floatingActionButton: FloatingActionButtonWidget(cubit: cubit),
     );
   }
