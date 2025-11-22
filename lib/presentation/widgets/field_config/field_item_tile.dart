@@ -24,23 +24,32 @@ class FieldItemTile extends StatelessWidget {
       FieldType.radio: "Radio Field",
     };
 
-    return ListTile(
-      title: Text(field.label),
-      leading: const Icon(Icons.drag_handle),
-
-      subtitle: Text(label[field.type]!),
-      trailing: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.edit),
-            onPressed: () => onEdit(field),
-          ),
-          IconButton(
-            icon: const Icon(Icons.delete, color: Colors.red),
-            onPressed: () => onDelete(field.id),
-          ),
-        ],
+    return Card(
+      elevation: 2,
+      // shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: ListTile(
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 10,
+        ),
+        title: Text(
+          field.label,
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
+        subtitle: Text(label[field.type]!),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.edit, color: Colors.blue),
+              onPressed: () => onEdit(field),
+            ),
+            IconButton(
+              icon: const Icon(Icons.delete, color: Colors.red),
+              onPressed: () => onDelete(field.id),
+            ),
+          ],
+        ),
       ),
     );
   }

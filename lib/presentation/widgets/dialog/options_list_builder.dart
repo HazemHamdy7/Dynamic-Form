@@ -15,6 +15,7 @@ class OptionsListBuilder extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         Expanded(
           child: ListView.builder(
@@ -34,6 +35,7 @@ class OptionsListBuilder extends StatelessWidget {
           ),
         ),
 
+        SizedBox(height: 16),
         TextButton(
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all(Colors.black45),

@@ -24,9 +24,32 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (context) => FormCubit(repo),
       child: MaterialApp(
-        title: 'Dynamic Form Builder',
-        theme: ThemeData(primarySwatch: Colors.deepPurple, useMaterial3: true),
         debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.deepPurple,
+          scaffoldBackgroundColor: Colors.grey[100],
+
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.deepPurple,
+            foregroundColor: Colors.white,
+            centerTitle: true,
+            elevation: 1,
+          ),
+
+          inputDecorationTheme: InputDecorationTheme(
+            border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.deepPurple, width: 2),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+
+          floatingActionButtonTheme: const FloatingActionButtonThemeData(
+            backgroundColor: Colors.deepPurple,
+            foregroundColor: Colors.white,
+            elevation: 4,
+          ),
+        ),
         home: const FieldConfigScreen(),
       ),
     );

@@ -2,6 +2,7 @@ import 'package:dynamic_form/data/factory/factory_model.dart';
 import 'package:dynamic_form/data/model/dropdown_field_model.dart';
 import 'package:dynamic_form/data/model/field_type.dart';
 import 'package:dynamic_form/data/model/radio_field_model.dart';
+import 'package:dynamic_form/presentation/widgets/dialog/field_name_input.dart';
 import 'package:dynamic_form/presentation/widgets/dialog/field_type_selector.dart';
 import 'package:dynamic_form/presentation/widgets/dialog/options_list_builder.dart';
 import 'package:flutter/material.dart';
@@ -65,45 +66,45 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
     final maxDialogWidth = MediaQuery.of(context).size.width * 0.6;
 
     return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+
       title: Text(widget.editField == null ? "Add Field" : "Edit Field"),
       content: SizedBox(
         width: maxDialogWidth,
-        height: 300,
-        child: Column(
-          children: [
-            TextFormField(
-              controller: labelController,
-              decoration: const InputDecoration(
-                labelText: "Label",
-                border: OutlineInputBorder(),
-              ),
-            ),
-            const SizedBox(height: 12),
-            FieldTypeSelector(
-              value: selectedType,
-              onChanged: (value) {
-                setState(() {
-                  selectedType = value ?? FieldType.text;
-                  if (selectedType == FieldType.text) {
-                    for (final c in optionControllers) {
-                      c.dispose();
-                    }
-                    optionControllers = [];
-                  }
-                });
-              },
-            ),
-            const SizedBox(height: 12),
+        height: 350,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              FieldNameInput(controller: labelController),
 
-            if (selectedType != FieldType.text)
-              Expanded(
-                child: OptionsListBuilder(
-                  options: optionControllers,
-                  onAddOption: addOption,
-                  onRemove: removeOption,
-                ),
+              const SizedBox(height: 12),
+              FieldTypeSelector(
+                value: selectedType,
+                onChanged: (value) {
+                  setState(() {
+                    selectedType = value ?? FieldType.text;
+                    if (selectedType == FieldType.text) {
+                      for (final c in optionControllers) {
+                        c.dispose();
+                      }
+                      optionControllers = [];
+                    }
+                  });
+                },
               ),
-          ],
+              const SizedBox(height: 12),
+
+              if (selectedType != FieldType.text)
+                SizedBox(
+                  height: 200,
+                  child: OptionsListBuilder(
+                    options: optionControllers,
+                    onAddOption: addOption,
+                    onRemove: removeOption,
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
       actions: [

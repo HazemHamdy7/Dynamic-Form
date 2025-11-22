@@ -27,7 +27,9 @@ class FieldListView extends StatelessWidget {
         }
 
         return ReorderableListView.builder(
-          padding: const EdgeInsets.all(12),
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.only(bottom: 100),
+
           itemCount: state.fields.length,
           onReorder: cubit.reorderFields,
           itemBuilder: (context, index) {
