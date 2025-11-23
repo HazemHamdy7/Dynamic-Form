@@ -36,6 +36,7 @@ class FieldListView extends StatelessWidget {
             return Material(
               key: ValueKey(field.id),
               child: FieldItemTile(
+                
                 field: field,
                 index: index,
                 onEdit: (oldField) async {

@@ -11,7 +11,6 @@ class FormCubit extends Cubit<DynamicFormState> {
     : super(DynamicFormState(fields: [], answers: {})) {
     loadFields();
   }
-
   Future<void> loadFields() async {
     final saved = await repository.loadFields();
     if (saved == null) return;

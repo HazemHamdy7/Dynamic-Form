@@ -33,7 +33,7 @@ class DynamicFormPreview extends StatelessWidget {
           const SizedBox(height: 16),
 
           SizedBox(
-            height: 200,
+            height: 250,
             child: BlocBuilder<FormCubit, DynamicFormState>(
               builder: (context, state) {
                 if (state.fields.isEmpty) {
