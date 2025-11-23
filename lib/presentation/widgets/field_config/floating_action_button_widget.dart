@@ -24,16 +24,16 @@ class FloatingActionButtonWidget extends StatelessWidget {
         if (created != null) {
           cubit.addField(created);
 
-        ScaffoldMessenger.of(context).showSnackBar(
-  SnackBar(
-    content: Text("Field saved successfully"),
-    backgroundColor: Colors.green.shade700,
-    behavior: SnackBarBehavior.floating,
-    margin: const EdgeInsets.all(10),
-    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-  ),
-);
-
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Field saved successfully"),
+              behavior: SnackBarBehavior.floating,
+              margin: const EdgeInsets.all(10),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+            ),
+          );
         }
       },
     );

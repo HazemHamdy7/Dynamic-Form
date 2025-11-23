@@ -1,3 +1,4 @@
+import 'package:dynamic_form/core/theme/app_theme.dart';
 import 'package:dynamic_form/data/model/field_type.dart';
 import 'package:dynamic_form/presentation/screens/add_field_dialog.dart';
 import 'package:flutter/material.dart';
@@ -35,18 +36,26 @@ class FieldListView extends StatelessWidget {
 
             return Material(
               key: ValueKey(field.id),
-              child: FieldItemTile(
-                
-                field: field,
-                index: index,
-                onEdit: (oldField) async {
-                  final updatedField = await showDialog<FieldModel?>(
-                    context: context,
-                    builder: (_) => AddFieldDialog(editField: oldField),
-                  );
-                  if (updatedField != null) cubit.updateField(updatedField);
-                },
-                onDelete: cubit.removeField,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: AppTheme.primary),
+
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: FieldItemTile(
+                  field: field,
+                  index: index,
+                  onEdit: (oldField) async {
+                    final updatedField = await showDialog<FieldModel?>(
+                      context: context,
+                      builder: (_) => AddFieldDialog(editField: oldField),
+                    );
+                    if (updatedField != null) cubit.updateField(updatedField);
+                  },
+                  onDelete: cubit.removeField,
+                ),
               ),
             );
           },

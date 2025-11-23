@@ -1,3 +1,4 @@
+import 'package:dynamic_form/core/theme/app_theme.dart';
 import 'package:dynamic_form/presentation/widgets/preview/dynamic_form_preview.dart';
 import 'package:dynamic_form/presentation/widgets/field_config/field_list_view.dart';
 import 'package:dynamic_form/presentation/widgets/field_config/floating_action_button_widget.dart';
@@ -16,12 +17,19 @@ class FieldConfigScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Field Configuration"),
+        backgroundColor: AppTheme.primary,
+        title: const Text(
+          "Field Configuration",
+          style: TextStyle(color: AppTheme.background),
+        ),
         actions: [
           BlocBuilder<FormCubit, DynamicFormState>(
             builder: (context, state) {
               return IconButton(
-                icon: const Icon(Icons.remove_red_eye),
+                icon: const Icon(
+                  Icons.remove_red_eye,
+                  color: AppTheme.background,
+                ),
                 onPressed: state.fields.isEmpty
                     ? null
                     : () {

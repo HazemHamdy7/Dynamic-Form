@@ -24,6 +24,7 @@ class FieldItemTile extends StatelessWidget {
       color: Colors.transparent,
       child: ListTile(
         leading: ReorderableDragStartListener(
+          key: ValueKey("${field.id}_${field.label}_${field.hashCode}"),
           index: index,
           child: const Icon(Icons.drag_handle),
         ),

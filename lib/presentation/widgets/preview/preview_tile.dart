@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dynamic_form/data/model/field_type.dart';
- 
+
 import 'preview_field_widget.dart';
 
 class PreviewTile extends StatelessWidget {
@@ -59,7 +59,7 @@ class PreviewTile extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-          PreviewFieldWidget(field: field),
+          //  PreviewFieldWidget(field: field),
         ],
       ),
     );
