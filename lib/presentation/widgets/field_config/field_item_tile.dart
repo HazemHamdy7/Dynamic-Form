@@ -1,14 +1,12 @@
 import 'package:dynamic_form/data/model/field_type.dart';
 import 'package:flutter/material.dart';
 
-typedef EditCallback = void Function(FieldModel field);
-typedef DeleteCallback = void Function(String fieldId);
-
 class FieldItemTile extends StatelessWidget {
   final FieldModel field;
   final int index;
-  final EditCallback onEdit;
-  final DeleteCallback onDelete;
+  final void Function(FieldModel field) onEdit;
+
+  final void Function(FieldModel field) onDelete;
 
   const FieldItemTile({
     super.key,
@@ -36,7 +34,7 @@ class FieldItemTile extends StatelessWidget {
             IconButton(icon: Icon(Icons.edit), onPressed: () => onEdit(field)),
             IconButton(
               icon: const Icon(Icons.delete, color: Colors.red),
-              onPressed: () => onDelete(field.id),
+              onPressed: () => onDelete(field),
             ),
           ],
         ),

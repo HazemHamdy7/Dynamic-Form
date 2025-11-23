@@ -142,7 +142,6 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
           .map((c) => c.text.trim())
           .where((o) => o.isNotEmpty)
           .toList();
-
       if (validOptions.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(

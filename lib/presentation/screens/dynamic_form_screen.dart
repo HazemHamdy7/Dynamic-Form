@@ -1,3 +1,4 @@
+import 'package:dynamic_form/core/theme/app_theme.dart';
 import 'package:dynamic_form/data/model/dropdown_field_model.dart';
 import 'package:dynamic_form/data/model/radio_field_model.dart';
 import 'package:dynamic_form/presentation/widgets/field_widgets/dropdown_field_item.dart';
@@ -17,7 +18,14 @@ class DynamicFormScreen extends StatelessWidget {
     final _formKey = GlobalKey<FormState>();
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Dynamic Form")),
+      appBar: AppBar(
+        backgroundColor: AppTheme.primary,
+
+        title: const Text(
+          "Dynamic Form",
+          style: TextStyle(color: AppTheme.background),
+        ),
+      ),
       body: BlocBuilder<FormCubit, DynamicFormState>(
         builder: (context, state) {
           final cubit = context.read<FormCubit>();

@@ -54,7 +54,7 @@ class FieldListView extends StatelessWidget {
                     );
                     if (updatedField != null) cubit.updateField(updatedField);
                   },
-                  onDelete: cubit.removeField,
+                  onDelete:  (field) => cubit.removeField(field.id),
                 ),
               ),
             );

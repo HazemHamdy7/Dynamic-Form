@@ -26,6 +26,7 @@ class FloatingActionButtonWidget extends StatelessWidget {
 
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
+              backgroundColor: Colors.green,
               content: Text("Field saved successfully"),
               behavior: SnackBarBehavior.floating,
               margin: const EdgeInsets.all(10),
