@@ -1,4 +1,5 @@
 import 'package:dynamic_form/core/di/service_locator.dart';
+import 'package:dynamic_form/core/shared/app_constant.dart';
 import 'package:dynamic_form/core/theme/app_theme.dart';
 import 'package:dynamic_form/data/repository/form_repository.dart';
 import 'package:dynamic_form/presentation/cubit/form_cubit.dart';
@@ -11,7 +12,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Hive.initFlutter();
-  await Hive.openBox('fields');
+  await Hive.openBox(AppConstant.fieldsBox);
   initServiceLocator();
 
   runApp(MyApp());

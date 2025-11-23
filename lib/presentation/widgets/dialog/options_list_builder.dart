@@ -21,13 +21,16 @@ class OptionsListBuilder extends StatelessWidget {
           child: ListView.builder(
             itemCount: options.length,
             itemBuilder: (context, index) {
-              return TextField(
-                controller: options[index],
-                decoration: InputDecoration(
-                  labelText: "Option ${index + 1}",
-                  suffixIcon: IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () => onRemove(index),
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: TextField(
+                  controller: options[index],
+                  decoration: InputDecoration(
+                    labelText: "Option ${index + 1}",
+                    suffixIcon: IconButton(
+                      icon: const Icon(Icons.close),
+                      onPressed: () => onRemove(index),
+                    ),
                   ),
                 ),
               );
@@ -35,7 +38,6 @@ class OptionsListBuilder extends StatelessWidget {
           ),
         ),
 
-        SizedBox(height: 16),
         TextButton(
           style: ButtonStyle(
             backgroundColor: WidgetStateProperty.all(Colors.black45),

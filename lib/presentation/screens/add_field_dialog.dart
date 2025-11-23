@@ -63,7 +63,7 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
 
   @override
   Widget build(BuildContext context) {
-    final maxDialogWidth = MediaQuery.of(context).size.width * 0.6;
+    final maxDialogWidth = MediaQuery.of(context).size.width * 0.9;
 
     return AlertDialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -71,7 +71,7 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
       title: Text(widget.editField == null ? "Add Field" : "Edit Field"),
       content: SizedBox(
         width: maxDialogWidth,
-        height: 350,
+        height: 300,
         child: SingleChildScrollView(
           child: Column(
             children: [
@@ -96,7 +96,7 @@ class _AddFieldDialogState extends State<AddFieldDialog> {
 
               if (selectedType != FieldType.text)
                 SizedBox(
-                  height: 200,
+                  height: 150,
                   child: OptionsListBuilder(
                     options: optionControllers,
                     onAddOption: addOption,
